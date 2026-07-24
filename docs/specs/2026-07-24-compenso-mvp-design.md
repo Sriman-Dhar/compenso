@@ -129,7 +129,7 @@ Design goes through the standard pipeline (`lofistack-frontend-stack`: ui-ux-pro
 
 ## 11. Docs deliverables (portfolio surface)
 
-`README.md` (pitch, architecture diagram, screenshots, live demo link, badge) · `docs/architecture.md` (mermaid: layering, run lifecycle, RLS model) · `SECURITY.md` · `docs/adr/` (ADR-001 money-as-integers, ADR-002 run immutability/snapshot, ADR-003 multi-tenant RLS design, ADR-004 pure engine package) · seeded **demo org** with realistic fake data on the deployed instance.
+`README.md` (pitch, architecture diagram, screenshots, badge) · `docs/architecture.md` (mermaid: layering, run lifecycle, RLS model) · `SECURITY.md` · `docs/adr/` (ADR-001 money-as-integers, ADR-002 run immutability/snapshot, ADR-003 multi-tenant RLS design, ADR-004 pure engine package). No demo deployment in scope (user decision 2026-07-24); seed data exists only for local dev/tests.
 
 ## 12. Risks / constraints
 
@@ -138,8 +138,8 @@ Design goes through the standard pipeline (`lofistack-frontend-stack`: ui-ux-pro
 - New Supabase project + Vercel project required (user creates; MCP added after).
 - Public repo → no real personal data ever in seeds/fixtures; demo data is synthetic.
 
-## 13. Open questions (answer before build plan)
+## 13. Resolved decisions (2026-07-24)
 
-1. **Demo currency/locale** for MVP seed + payslips: USD (default, broadest CV audience)?
-2. **Repo name** `compenso` on `Sriman-Dhar` — create remote now or after MVP skeleton runs locally?
-3. Supabase project: create it when the build starts (needs your dashboard action), or should the plan begin with local-only Supabase CLI?
+1. **Currency:** USD default, org-configurable field from day one. No demo deployment (user decision) — build only.
+2. **GitHub remote:** deferred — local git only until the user green-lights remote creation (standing rule: ask before remote/push).
+3. **Supabase:** engine + skeleton phases run without it; the cloud project gets created (user dashboard action) when the first migration lands.

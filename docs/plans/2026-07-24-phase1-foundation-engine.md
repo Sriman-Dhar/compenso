@@ -1402,7 +1402,7 @@ Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
 
 **Files:**
 - Create: `.github/workflows/ci.yml`
-- Create: `README.md`
+- Modify: `README.md` (already exists — update Status only)
 - Modify: `packages/engine/package.json` (coverage script)
 
 **Interfaces:**
@@ -1448,40 +1448,9 @@ jobs:
       - run: pnpm -r test
 ```
 
-- [ ] **Step 4: Write README**
+- [ ] **Step 4: Update README status**
 
-`README.md`:
-```markdown
-# Compenso
-
-**Payroll operations platform** — universal work-data intake, auditable pay
-runs, payout tracking, and payslips for teams that mix employees and
-contractors. Compenso deliberately stops at the tax-filing boundary: it is
-the operations layer, not a tax filer.
-
-## Architecture
-
-pnpm workspace:
-
-| Package | Role |
-|---|---|
-| `@compenso/engine` | Pure, zero-dependency pay calculation + audit rules. All money is integer cents (ADR-001). Fully unit-tested. |
-| `@compenso/shared` | Domain types shared by engine, app, and functions. |
-| `apps/web` | React app (Phase 3+). |
-
-Key decisions live in [`docs/adr/`](docs/adr/). Design spec:
-[`docs/specs/`](docs/specs/).
-
-## Development
-
-    pnpm install
-    pnpm -r typecheck
-    pnpm -r test
-
-## Status
-
-Phase 1 (engine foundation) — in progress. See `docs/plans/`.
-```
+`README.md` already exists at the repo root. In its **Roadmap** table, change the Phase 1 row's Status cell from `🔨 in progress` to `✅ done — engine fully tested`. Make no other changes.
 
 - [ ] **Step 5: Full verification**
 

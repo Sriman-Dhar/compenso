@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compenso — Concept Mindmap</title>
+<style>
+  :root {
+    --bg: #0a0e14;
+    --surface: #111722;
+    --surface-2: #161e2c;
+    --line: #2a3548;
+    --text: #e8edf5;
+    --muted: #8b98ad;
+    --cyan: #22d3ee;
+    --c1: #22d3ee; /* intake */
+    --c2: #4ade80; /* pay engine */
+    --c3: #facc15; /* payouts */
+    --c4: #f87171; /* compliance */
+    --c5: #c084fc; /* ai */
+    --c6: #38bdf8; /* intelligence */
+    --c7: #fb923c; /* platform */
+    --c8: #f472b6; /* people */
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+    line-height: 1.5;
+    padding: 48px 32px 80px;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+
+  /* ---------- header ---------- */
+  header { text-align: center; margin-bottom: 56px; }
+  .kicker {
+    font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--cyan); margin-bottom: 12px;
+  }
+  h1 { font-size: 42px; font-weight: 800; letter-spacing: -1px; }
+  h1 .wt { color: var(--muted); font-size: 16px; font-weight: 400; letter-spacing: 0; vertical-align: middle; margin-left: 8px; }
+  .tagline { color: var(--muted); font-size: 17px; margin-top: 10px; }
+  .tagline b { color: var(--text); }
+
+  /* ---------- mindmap ---------- */
+  .map {
+    display: grid;
+    grid-template-columns: 1fr 300px 1fr;
+    gap: 24px 56px;
+    align-items: center;
+    margin-bottom: 96px;
+  }
+  .col { display: flex; flex-direction: column; gap: 24px; }
+
+  .root {
+    grid-column: 2;
+    background: linear-gradient(160deg, #0e2a33, #101828);
+    border: 1px solid var(--cyan);
+    border-radius: 16px;
+    padding: 28px 22px;
+    text-align: center;
+    box-shadow: 0 0 60px rgba(34, 211, 238, 0.12);
+  }
+  .root .name { font-size: 26px; font-weight: 800; color: var(--cyan); }
+  .root .sub { font-size: 13px; color: var(--muted); margin-top: 8px; }
+  .root .pos { font-size: 14px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+
+  .card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent, var(--cyan));
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  /* connector lines toward the center root */
+  .col.left .card::after, .col.right .card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 56px;
+    height: 2px;
+  }
+  .col.left .card::after {
+    left: 100%;
+    background: linear-gradient(90deg, var(--accent), transparent);
+  }
+  .col.right .card::before {
+    right: 100%;
+    background: linear-gradient(270deg, var(--accent), transparent);
+  }
+  .col.right .card { border-left: 1px solid var(--line); border-right: 3px solid var(--accent); }
+
+  .card h2 { font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--accent); }
+  .card ul { list-style: none; }
+  .card li {
+    font-size: 13.5px; color: #c4cddb;
+    padding: 4px 0 4px 16px; position: relative;
+  }
+  .card li::before {
+    content: ''; position: absolute; left: 0; top: 11px;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); opacity: 0.7;
+  }
+  .card li b { color: var(--text); }
+  .tag {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    letter-spacing: 1px; padding: 2px 7px; border-radius: 20px;
+    margin-left: 6px; vertical-align: 1px;
+  }
+  .tag.mvp { background: rgba(74, 222, 128, .15); color: #4ade80; }
+  .tag.v2  { background: rgba(250, 204, 21, .15); color: #facc15; }
+  .tag.v3  { background: rgba(248, 113, 113, .15); color: #f87171; }
+
+  /* ---------- sections ---------- */
+  section { margin-bottom: 80px; }
+  .sec-title { font-size: 24px; font-weight: 800; margin-bottom: 6px; }
+  .sec-sub { color: var(--muted); font-size: 14px; margin-bottom: 28px; }
+
+  .wedge-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .wedge {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 12px; padding: 20px;
+  }
+  .wedge .num { font-size: 12px; font-weight: 800; color: var(--cyan); letter-spacing: 2px; }
+  .wedge h3 { font-size: 15px; margin: 8px 0; }
+  .wedge p { font-size: 13px; color: var(--muted); }
+
+  .phases { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .phase { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+  .phase.p1 { border-top: 3px solid #4ade80; }
+  .phase.p2 { border-top: 3px solid #facc15; }
+  .phase.p3 { border-top: 3px solid #f87171; }
+  .phase .ph { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .phase h3 { font-size: 18px; margin: 6px 0 4px; }
+  .phase .who { font-size: 13px; color: var(--cyan); margin-bottom: 12px; }
+  .phase ul { list-style: none; }
+  .phase li { font-size: 13.5px; color: #c4cddb; padding: 4px 0 4px 16px; position: relative; }
+  .phase li::before { content: '→'; position: absolute; left: 0; color: var(--muted); font-size: 11px; top: 7px; }
+
+  .biz-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+  .biz, .risks { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+  .biz h3, .risks h3 { font-size: 16px; margin-bottom: 12px; }
+  .biz table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .biz td { padding: 8px 4px; border-bottom: 1px solid var(--line); color: #c4cddb; vertical-align: top; }
+  .biz td:first-child { color: var(--text); font-weight: 600; white-space: nowrap; padding-right: 16px; }
+  .risks { border-color: rgba(248, 113, 113, .35); }
+  .risks h3 { color: #f87171; }
+  .risks li { font-size: 13px; color: var(--muted); margin: 8px 0 8px 16px; }
+
+  footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 40px; }
+
+  @media (max-width: 1020px) {
+    .map { grid-template-columns: 1fr; }
+    .root { grid-column: 1; order: -1; }
+    .col.left .card::after, .col.right .card::before { display: none; }
+    .col.right .card { border-right: 1px solid var(--line); border-left: 3px solid var(--accent); }
+    .biz-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">Concept Mindmap · July 2026</div>
+    <h1>Compenso</h1>
+    <p class="tagline">The <b>plug-and-play payroll operations layer</b> — it feeds on whatever a business already uses,<br>
+    runs the money workflow end-to-end, and resells through agencies.</p>
+  </header>
+
+  <!-- ================= MINDMAP ================= -->
+  <div class="map">
+
+    <div class="col left">
+      <div class="card" style="--accent: var(--c1);">
+        <h2>🔌 Universal Intake</h2>
+        <ul>
+          <li><b>AI spreadsheet import</b> — drop any Excel/CSV, columns auto-map to pay data <span class="tag mvp">MVP</span></li>
+          <li>Native time clock — web + mobile PWA <span class="tag mvp">MVP</span></li>
+          <li>Integrations: Clockify, Toggl, QuickBooks Time, GHL <span class="tag v2">V2</span></li>
+          <li>Approval chains: manager → finance sign-off <span class="tag mvp">MVP</span></li>
+          <li>Data flagged for anomalies <i>before</i> it enters a pay run</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--accent: var(--c2);">
+        <h2>💰 Pay Engine</h2>
+        <ul>
+          <li>Every pay type: salary, hourly, per-job, commission, tips, stipends <span class="tag mvp">MVP</span></li>
+          <li><b>Mixed teams</b> — employees + contractors in one pay run <span class="tag mvp">MVP</span></li>
+          <li>Weekly / biweekly / monthly / off-cycle & bonus runs <span class="tag mvp">MVP</span></li>
+          <li>Deductions, reimbursements, advances & loan tracking</li>
+          <li>Multi-currency with FX locked at run time <span class="tag v2">V2</span></li>
+        </ul>
+      </div>
+
+      <div class="card" style="--accent: var(--c3);">
+        <h2>🏦 Payouts</h2>
+        <ul>
+          <li>One-click payout batches: Wise, PayPal, Stripe, bank-file export <span class="tag mvp">MVP</span></li>
+          <li>Status tracked to <b>“landed in account”</b>, not “sent”</li>
+          <li>Split payments across multiple accounts</li>
+          <li><b>Embedded payroll partner</b> (Check / Zeal) → direct deposit + US tax filing without building compliance <span class="tag v3">V3</span></li>
+        </ul>
+      </div>
+
+      <div class="card" style="--accent: var(--c4);">
+        <h2>🛡️ Compliance & Docs</h2>
+        <ul>
+          <li>Branded auto-payslips (PDF) every run <span class="tag mvp">MVP</span></li>
+          <li><b>Country packs</b> — statutory calc templates, start with 1–2 markets</li>
+          <li>Contractor doc collection at onboarding: W-9 / W-8BEN</li>
+          <li>Immutable audit trail on every change <span class="tag mvp">MVP</span></li>
+          <li>Clean exports for accountants & filers (Gusto/ADP/QuickBooks formats)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="root">
+      <div class="name">Compenso</div>
+      <div class="sub">Payroll Operations Platform</div>
+      <div class="pos">Not a Gusto clone.<br>The layer <b>around</b> payroll that incumbents ignore — intake → run → payout → insight — sold direct <i>and</i> white-label.</div>
+    </div>
+
+    <div class="col right">
+      <div class="card" style="--accent: var(--c5);">
+        <h2>🤖 AI Copilot — the wedge</h2>
+        <ul>
+          <li><b>Pre-run audit</b>: ghost employees, duplicate payouts, overtime spikes, sudden pay jumps <span class="tag mvp">MVP</span></li>
+          <li>Ask payroll anything: “overtime cost June vs May?” <span class="tag v2">V2</span></li>
+          <li><b>Explain-my-payslip</b> for employees — kills the #1 HR ticket <span class="tag v2">V2</span></li>
+          <li>Auto-maps any imported spreadsheet <span class="tag mvp">MVP</span></li>
+          <li>Answers policy questions from the company’s own rules</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--accent: var(--c6);">
+        <h2>📊 Intelligence</h2>
+        <ul>
+          <li>Live labor cost per project / department / client <span class="tag v2">V2</span></li>
+          <li>Overtime leakage alerts & trends</li>
+          <li>Payroll forecasting + cash-flow projection</li>
+          <li>Budget vs actual per cycle</li>
+          <li><b>Profitability reports</b> — revenue in (manual / Stripe / QuickBooks sync) → labor cost vs money made, profit per project & client, “payroll = X% of revenue” <span class="tag v2">V2</span></li>
+          <li><b>Agency mode</b>: margin per client (bill rate vs pay rate)</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--accent: var(--c7);">
+        <h2>🧩 Platform & White-label</h2>
+        <ul>
+          <li><b>White-label mode</b>: reseller’s logo, domain, colors <span class="tag v2">V2</span></li>
+          <li><b>GHL marketplace app</b> — 60k+ agencies resell to their SMB clients <span class="tag v2">V2</span></li>
+          <li>Embed API + widgets: drop payroll into any SaaS <span class="tag v3">V3</span></li>
+          <li>Multi-tenant, DB-per-client option</li>
+          <li>Roles/permissions <span class="tag mvp">MVP</span> · SSO + SCIM <span class="tag v3">V3</span> · webhooks</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--accent: var(--c8);">
+        <h2>👥 People Portal</h2>
+        <ul>
+          <li>Self-service: payslips, history, documents <span class="tag mvp">MVP</span></li>
+          <li>PTO requests + balances <span class="tag v2">V2</span></li>
+          <li>Onboarding flow: bank details, tax forms, contract e-sign</li>
+          <li>Payday notifications — email / WhatsApp</li>
+          <li>Mobile PWA (installable, offline payslips)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= WEDGE ================= -->
+  <section>
+    <div class="sec-title">Why this sells when Gusto / ADP / Deel exist</div>
+    <div class="sec-sub">Five differentiators — each one maps to a documented market complaint.</div>
+    <div class="wedge-grid">
+      <div class="wedge">
+        <div class="num">01</div>
+        <h3>Plug-and-play, not rip-and-replace</h3>
+        <p>Feeds on the client’s existing spreadsheets, clocks and tools. Kills the “control gap” — the #1 SMB payroll complaint.</p>
+      </div>
+      <div class="wedge">
+        <div class="num">02</div>
+        <h3>White-label distribution</h3>
+        <p>Agencies (incl. the GHL ecosystem) resell it under their brand. Incumbents can’t follow without cannibalizing themselves.</p>
+      </div>
+      <div class="wedge">
+        <div class="num">03</div>
+        <h3>AI-native pre-run audit</h3>
+        <p>Errors caught <i>before</i> money moves, not after. Incumbents bolt AI on; this is built around it.</p>
+      </div>
+      <div class="wedge">
+        <div class="num">04</div>
+        <h3>Flat, honest pricing</h3>
+        <p>One number, unlimited runs. Direct attack on the base-fee + per-seat + hidden-add-on maze SMBs hate decoding.</p>
+      </div>
+      <div class="wedge">
+        <div class="num">05</div>
+        <h3>Compliance-light now, partner-powered later</h3>
+        <p>Start as the ops layer (zero filing risk). Add real tax filing via embedded payroll APIs when upmarket — the enterprise door stays open.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ROADMAP ================= -->
+  <section>
+    <div class="sec-title">Roadmap — SMB now, enterprise path later</div>
+    <div class="sec-sub">Each phase is independently sellable. No phase depends on winning the previous market first.</div>
+    <div class="phases">
+      <div class="phase p1">
+        <div class="ph">Phase 1 · MVP</div>
+        <h3>Payroll Ops for SMBs</h3>
+        <div class="who">Sell to: agencies, dev shops, service SMBs with mixed employee/contractor teams</div>
+        <ul>
+          <li>Universal intake (AI import + time clock + approvals)</li>
+          <li>Pay engine: all pay types, mixed teams, off-cycle runs</li>
+          <li>Payout batches + status tracking</li>
+          <li>Payslips, audit trail, accountant exports</li>
+          <li>People portal (payslips + docs)</li>
+          <li>Pre-run AI audit v1</li>
+        </ul>
+      </div>
+      <div class="phase p2">
+        <div class="ph">Phase 2 · V2</div>
+        <h3>White-label & Channel</h3>
+        <div class="who">Sell to: agencies as resellers — they bring the SMBs</div>
+        <ul>
+          <li>White-label mode (logo/domain/colors)</li>
+          <li>GHL marketplace app</li>
+          <li>Time-tool + accounting integrations</li>
+          <li>AI copilot: NL queries + explain-my-payslip</li>
+          <li>Analytics suite + profitability reports (labor cost vs revenue) + agency margin view</li>
+          <li>Multi-currency runs</li>
+        </ul>
+      </div>
+      <div class="phase p3">
+        <div class="ph">Phase 3 · V3</div>
+        <h3>Upmarket & Embedded</h3>
+        <div class="who">Sell to: mid-market + SaaS builders who embed payroll</div>
+        <ul>
+          <li>Embedded filing partner (Check/Zeal) → full US payroll</li>
+          <li>Embed API + widgets</li>
+          <li>SSO, SCIM, advanced permissions</li>
+          <li>More country packs</li>
+          <li>SOC 2 track</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BUSINESS MODEL + RISKS ================= -->
+  <section>
+    <div class="sec-title">Business model & honest risks</div>
+    <div class="sec-sub">Flat pricing is itself a feature in this market.</div>
+    <div class="biz-grid">
+      <div class="biz">
+        <h3>Revenue lines</h3>
+        <table>
+          <tr><td>Direct SaaS</td><td>Flat tiers by active workers (e.g. $29 / $79 / $199 per month), unlimited pay runs — no per-run or hidden fees</td></tr>
+          <tr><td>Agency license</td><td>Wholesale seats — agency pays a flat platform fee, resells at their own price under their brand</td></tr>
+          <tr><td>Embed API</td><td>Usage-based, per active worker per month (Phase 3)</td></tr>
+          <tr><td>Filing add-on</td><td>Pass-through margin on the embedded payroll partner (Phase 3)</td></tr>
+        </table>
+      </div>
+      <div class="risks">
+        <h3>⚠️ Risks to respect</h3>
+        <ul>
+          <li>Deel/Remote own global contractor payments — don’t fight them on cross-border rails; track payouts, don’t move money at first</li>
+          <li>GHL marketplace approval is a gate, not a given</li>
+          <li>Embedded filing partners (Check/Zeal) have revenue minimums — Phase 3 needs traction first</li>
+          <li>“Payroll” word sets compliance expectations — market Phase 1 as payroll <i>operations</i></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>Compenso concept v1 · name locked 2026-07-24 · brainstorm artifact · ~/Work/Compenso/mindmap.html</footer>
+</div>
+</body>
+</html>
